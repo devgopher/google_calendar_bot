@@ -11,6 +11,7 @@ public class Reminder
     /// Gets or sets the unique identifier for the reminder.
     /// This identifier is used to uniquely identify each reminder instance.
     /// </summary>
+    [Key]
     public Guid Id { get; set; }
 
     /// <summary>

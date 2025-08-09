@@ -12,6 +12,7 @@ public class GoogleTokens
     /// This identifier is used to associate the tokens with a specific chat.
     /// </summary>
     [MaxLength(128)]
+    [Key]
     public required string ChatId { get; set; } 
 
     /// <summary>
