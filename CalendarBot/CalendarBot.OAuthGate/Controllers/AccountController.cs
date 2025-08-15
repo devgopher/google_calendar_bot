@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace CalendarBot.OAuthGate.Controllers;
 
+[Route("api/[controller]")]
 public class AccountController : Controller
 {
     private readonly IOptionsSnapshot<GoogleAuthSettings> _settings;
@@ -15,8 +16,8 @@ public class AccountController : Controller
         _settings = settings;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GoogleResponse(string returnUrl = "/")
+    [HttpGet("[action]")]
+    public async Task<IActionResult> GoogleResponse([FromQuery]string returnUrl)
     {
         var result = await HttpContext.AuthenticateAsync("Cookies");
         var accessToken = await HttpContext.GetTokenAsync("access_token");
@@ -24,5 +25,6 @@ public class AccountController : Controller
         return Redirect(returnUrl); // Перенаправление на исходный URL
     }
 
+    [HttpGet("[action]")]
     public IActionResult Logout() => SignOut("Cookies", GoogleDefaults.AuthenticationScheme);
 }
