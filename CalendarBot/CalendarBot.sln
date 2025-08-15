@@ -34,6 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Botticelli.Controls.Layouts
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Botticelli.Controls", "..\submodules\Botticelli.Controls\Botticelli.Controls.csproj", "{9FD66DE7-EABB-4CC2-9229-9936CB691CC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBot.OAuthGate", "CalendarBot.OAuthGate\CalendarBot.OAuthGate.csproj", "{319D0256-0961-4D1F-A0CD-F037E1ACF79F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBot.Commons", "CalendarBot.Commons\CalendarBot.Commons.csproj", "{606ECF7D-C5C0-4798-8946-A3060CFF459C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,14 @@ Global
 		{9FD66DE7-EABB-4CC2-9229-9936CB691CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FD66DE7-EABB-4CC2-9229-9936CB691CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FD66DE7-EABB-4CC2-9229-9936CB691CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319D0256-0961-4D1F-A0CD-F037E1ACF79F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319D0256-0961-4D1F-A0CD-F037E1ACF79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319D0256-0961-4D1F-A0CD-F037E1ACF79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319D0256-0961-4D1F-A0CD-F037E1ACF79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606ECF7D-C5C0-4798-8946-A3060CFF459C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606ECF7D-C5C0-4798-8946-A3060CFF459C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606ECF7D-C5C0-4798-8946-A3060CFF459C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606ECF7D-C5C0-4798-8946-A3060CFF459C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AF8094C0-EDD3-4953-82A3-5287D2DEFF37} = {0263DEF3-E739-4402-8262-FB7CAFFB9816}
