@@ -6,7 +6,7 @@ using Botticelli.Framework.Telegram.Extensions;
 using CalendarBot.Commands;
 using CalendarBot.Commands.Processors;
 using CalendarBot.Dal;
-using CalendarBot.Dal.Dal;
+using CalendarBot.Dal.Database;
 using CalendarBot.Settings;
 using Microsoft.EntityFrameworkCore;
 using NLog.Extensions.Logging;

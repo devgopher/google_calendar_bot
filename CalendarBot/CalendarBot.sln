@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBot.Commons", "Cale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBot.Dal", "CalendarBot.Dal\CalendarBot.Dal.csproj", "{BCCFEFD7-69B4-4178-AD17-91AEE651A938}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBot.Integrations", "CalendarBot.Integrations\CalendarBot.Integrations.csproj", "{780ED539-9A1A-4A7B-9151-269F094D2175}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{BCCFEFD7-69B4-4178-AD17-91AEE651A938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCCFEFD7-69B4-4178-AD17-91AEE651A938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCCFEFD7-69B4-4178-AD17-91AEE651A938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{780ED539-9A1A-4A7B-9151-269F094D2175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{780ED539-9A1A-4A7B-9151-269F094D2175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{780ED539-9A1A-4A7B-9151-269F094D2175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{780ED539-9A1A-4A7B-9151-269F094D2175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AF8094C0-EDD3-4953-82A3-5287D2DEFF37} = {0263DEF3-E739-4402-8262-FB7CAFFB9816}

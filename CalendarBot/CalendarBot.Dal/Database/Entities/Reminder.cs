@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CalendarBot.Dal.Dal.Entities;
+namespace CalendarBot.Dal.Database.Entities;
 
 /// <summary>
 /// Represents a reminder for an event.
