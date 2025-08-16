@@ -1,7 +1,7 @@
-﻿using CalendarBot.Dal.Entities;
+﻿using CalendarBot.Dal.Dal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CalendarBot.Dal;
+namespace CalendarBot.Dal.Dal;
 
 public class CalendarBotDbContext : DbContext
 {
@@ -10,6 +10,8 @@ public class CalendarBotDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Event> Events { get; set; }
+    
     public virtual DbSet<GoogleTokens> Tokens { get; set; }
 
     public virtual DbSet<Reminder> Reminders { get; set; }

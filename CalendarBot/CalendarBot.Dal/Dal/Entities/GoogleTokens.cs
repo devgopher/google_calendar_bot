@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CalendarBot.Dal.Entities;
+namespace CalendarBot.Dal.Dal.Entities;
 
 /// <summary>
 /// Google OAuth 2.0 tokens
