@@ -11,6 +11,7 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\CalendarBot.Dal\CalendarBot.Dal.csproj" />
+      <ProjectReference Include="..\CalendarBot.OAuthGate\CalendarBot.OAuthGate.csproj" />
     </ItemGroup>
 
 </Project>

@@ -46,20 +46,11 @@ public class InfoCommandProcessor<TReplyMarkup> : CommandProcessor<InfoCommand> 
         _options = SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
     }
 
-    protected override Task InnerProcessContact(Message message, CancellationToken token)
-    {
-        return Task.CompletedTask;
-    }
+    protected override Task InnerProcessContact(Message message, CancellationToken token) => Task.CompletedTask;
 
-    protected override Task InnerProcessPoll(Message message, CancellationToken token)
-    {
-        return Task.CompletedTask;
-    }
+    protected override Task InnerProcessPoll(Message message, CancellationToken token) => Task.CompletedTask;
 
-    protected override Task InnerProcessLocation(Message message, CancellationToken token)
-    {
-        return Task.CompletedTask;
-    }
+    protected override Task InnerProcessLocation(Message message, CancellationToken token) => Task.CompletedTask;
 
     protected override async Task InnerProcess(Message message, CancellationToken token)
     {
@@ -69,10 +60,11 @@ public class InfoCommandProcessor<TReplyMarkup> : CommandProcessor<InfoCommand> 
             {
                 Uid = Guid.NewGuid().ToString(),
                 ChatIds = message.ChatIds,
-                Body = "Discover delicious recipes at your fingertips! Simply type in your favorite ingredients or dish names, and our" +
-                       " bot will provide you with a variety of recipes tailored to your preferences. Whether you're looking for quick meals," +
-                       " healthy options, or gourmet dishes, the Recipe Assistant is here to inspire your culinary adventures. Start cooking today!" +
-                       "\nEnjoy!"
+                Body =
+                    "Discover delicious recipes at your fingertips! Simply type in your favorite ingredients or dish names, and our" +
+                    " bot will provide you with a variety of recipes tailored to your preferences. Whether you're looking for quick meals," +
+                    " healthy options, or gourmet dishes, the Recipe Assistant is here to inspire your culinary adventures. Start cooking today!" +
+                    "\nEnjoy!"
             }
         };
 
@@ -87,5 +79,4 @@ public class InfoCommandProcessor<TReplyMarkup> : CommandProcessor<InfoCommand> 
 
         return responseMarkup;
     }
-
 }

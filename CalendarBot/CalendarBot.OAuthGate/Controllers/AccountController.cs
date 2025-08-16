@@ -21,7 +21,7 @@ public class AccountController : Controller
     }
 
     [HttpGet("[action]")]
-    public Task<string> GetRedirectLink(string chatId, CancellationToken token)
+    public Task<string> Authorize(string chatId)
     {
         return Task.FromResult("https://accounts.google.com/o/oauth2/auth"
             .SetQueryParams(new

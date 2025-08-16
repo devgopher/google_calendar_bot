@@ -72,10 +72,37 @@ public class CalendarWriter : ICalendarWriter
         await _context.SaveChangesAsync();
     }
 
+    /// <summary>
+    ///     Upserts reminder
+    /// </summary>
+    /// <param name="reminder"></param>
+    /// <returns></returns>
+    public Task UpsertReminderAsync(Reminder? reminder)
+    {
+        if (!_context.Reminders.Any(r => r.Id == reminder.Id)) _context.Reminders.Add(reminder);
+
+        return Task.CompletedTask;
+    }
+    
+
     public async Task DeleteReminderAsync(int id)
     {
         var reminder = await _context.Reminders.FindAsync(id);
         if (reminder != null)
             _context.Reminders.Remove(reminder);
     }
+
+    /// <summary>
+    ///     Upserts event
+    /// </summary>
+    /// <param name="event"></param>
+    /// <returns></returns>
+    public Task UpsertEventAsync(Event? @event)
+    {
+        if (!_context.Events.Any(r => r.Id == @event.Id)) _context.Events.Add(@event);
+
+        return Task.CompletedTask;
+    }
+
+
 }

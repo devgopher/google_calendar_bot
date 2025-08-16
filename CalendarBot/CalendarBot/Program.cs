@@ -52,6 +52,10 @@ builder.Services.AddBotCommand<GetEventsForTodayCommand>()
        .AddProcessor<GetEventsForTodayCommandProcessor<ReplyKeyboardMarkup>>()
        .AddValidator<PassValidator<GetEventsForTodayCommand>>();
 
+builder.Services.AddBotCommand<AuthorizeCommand>()
+       .AddProcessor<AuthorizeCommandProcessor<ReplyKeyboardMarkup>>()
+       .AddValidator<PassValidator<AuthorizeCommand>>();
+
 var app = builder.Build();
 
 await app.RunAsync();

@@ -36,10 +36,24 @@ public interface ICalendarWriter
     /// </summary>
     /// <param name="reminder">The reminder to update.</param>
     Task UpdateReminderAsync(Reminder? reminder);
+    
+    /// <summary>
+    ///     Upsert a reminder asynchronously.
+    /// </summary>
+    /// <param name="reminder">The reminder to update.</param>
+    Task UpsertReminderAsync(Reminder? reminder);
 
     /// <summary>
     ///     Deletes a reminder by its ID asynchronously.
     /// </summary>
     /// <param name="id">The ID of the reminder to delete.</param>
     Task DeleteReminderAsync(int id);
+
+    
+        
+    /// <summary>
+    ///     Upsert an event asynchronously.
+    /// </summary>
+    /// <param name="@event">The reminder to update.</param>
+    Task UpsertEventAsync(Event @event);
 }

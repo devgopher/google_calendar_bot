@@ -4,22 +4,6 @@ using Event = CalendarBot.Dal.Database.Entities.Event;
 
 namespace CalendarBot.Integrations.Google;
 
-public interface ICalendarEventService
-{
-    /// <summary>
-    /// Gets all upcoming events from the user's primary calendar asynchronously.
-    /// </summary>
-    /// <returns>A collection of events.</returns>
-    Task<IEnumerable<Event>> GetAllUpcomingEventsAsync();
-
-    /// <summary>
-    /// Gets a specific event by its ID asynchronously.
-    /// </summary>
-    /// <param name="eventId">The ID of the event.</param>
-    /// <returns>The event with the specified ID.</returns>
-    Task<Event> GetEventByIdAsync(string eventId);
-}
-
 public class CalendarEventService : ICalendarEventService
 {
     private readonly CalendarService _calendarService;
@@ -47,7 +31,9 @@ public class CalendarEventService : ICalendarEventService
         request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
         Events events = await request.ExecuteAsync();
-        return events.Items;
+        // return events.Items;
+
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -57,6 +43,7 @@ public class CalendarEventService : ICalendarEventService
     /// <returns>The event with the specified ID.</returns>
     public async Task<Event> GetEventByIdAsync(string eventId)
     {
-        return await _calendarService.Events.Get("primary", eventId).ExecuteAsync();
+        throw new NotImplementedException();
+        //return await _calendarService.Events.Get("primary", eventId).ExecuteAsync();
     }
 }
