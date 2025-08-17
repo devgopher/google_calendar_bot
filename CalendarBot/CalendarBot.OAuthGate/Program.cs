@@ -2,7 +2,6 @@ using CalendarBot.OAuthGate.Settings;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-s://aka.ms/aspnetcore/swashbuckle
 
 // Добавление сервисов в контейнер зависимостей
 builder.Services.AddControllersWithViews();

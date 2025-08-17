@@ -11,9 +11,8 @@ public class GoogleUpdater : IHostedService
 {
     private readonly ICalendarEventService _calendarEventService;
     private readonly ICalendarWriter _calendarWriter;
-    private readonly CancellationTokenSource _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource();
     private readonly CancellationToken _cancellationToken;
-    
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
     
     public GoogleUpdater(ICalendarEventService calendarEventService,
         ICalendarWriter calendarWriter)

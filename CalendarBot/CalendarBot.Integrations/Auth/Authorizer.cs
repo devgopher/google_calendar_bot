@@ -1,5 +1,4 @@
-﻿using CalendarBot.Dal.Database.Repositories;
-using CalendarBot.OAuthGate.Settings;
+﻿using CalendarBot.OAuthGate.Settings;
 using Flurl;
 using Microsoft.Extensions.Options;
 
@@ -7,13 +6,11 @@ namespace CalendarBot.Integrations.Auth;
 
 public class Authorizer : IAuthorizer
 {
-    private readonly IAuth _auth;
-    private readonly IOptionsSnapshot<GoogleAuthSettings> _settings;
+    private readonly IOptions<GoogleAuthSettings> _settings;
 
-    public Authorizer(IOptionsSnapshot<GoogleAuthSettings> settings, IAuth auth)
+    public Authorizer(IOptions<GoogleAuthSettings> settings)
     {
         _settings = settings;
-        _auth = auth;
     }
 
     public Task<string> Authorize(string chatId)

@@ -1,4 +1,5 @@
-﻿using Botticelli.Client.Analytics;
+﻿using System.Reflection;
+using Botticelli.Client.Analytics;
 using Botticelli.Controls.BasicControls;
 using Botticelli.Controls.Layouts.Inlines;
 using Botticelli.Controls.Parsers;
@@ -19,39 +20,48 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
 {
     private readonly IAuthorizer _authorizer;
     private readonly ILayoutSupplier<TReplyMarkup> _layoutSupplier;
-
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="AuthorizeCommandProcessor" /> class.
-    /// </summary>
-    /// <param name="logger">The logger used for logging information and errors.</param>
-    /// <param name="commandValidator">The validator for the authorization command.</param>
-    /// <param name="messageValidator">The validator for messages associated with the command.</param>
-    /// <param name="authorizer">OAuth support</param>
-    /// <param name="layoutSupplier">Layout supplier</param>
-    public AuthorizeCommandProcessor(ILogger logger, ICommandValidator<AuthorizeCommand> commandValidator,
-        IValidator<Message> messageValidator, IAuthorizer authorizer, ILayoutSupplier<TReplyMarkup> layoutSupplier)
-        : base(logger, commandValidator, messageValidator)
+    private readonly SendOptionsBuilder<TReplyMarkup>? _options;
+    
+    public AuthorizeCommandProcessor(ILogger<AuthorizeCommandProcessor<TReplyMarkup>> logger,
+        ICommandValidator<AuthorizeCommand> commandValidator,
+        ILayoutSupplier<TReplyMarkup> layoutSupplier,
+        ILayoutParser layoutParser,
+        IValidator<Message> messageValidator,
+        IAuthorizer authorizer)
+        : base(logger,
+            commandValidator,
+            messageValidator)
     {
         _authorizer = authorizer;
-        _layoutSupplier = layoutSupplier;
+        var responseMarkup = Init(layoutSupplier, layoutParser);
+
+        _options = SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
     }
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="AuthorizeCommandProcessor" /> class with metrics processing.
-    /// </summary>
-    /// <param name="logger">The logger used for logging information and errors.</param>
-    /// <param name="commandValidator">The validator for the authorization command.</param>
-    /// <param name="messageValidator">The validator for messages associated with the command.</param>
-    /// <param name="metricsProcessor">An optional metrics processor for tracking performance metrics.</param>
-    /// <param name="authorizer">OAuth support</param>
-    /// <param name="layoutSupplier">Layout supplier</param>
-    public AuthorizeCommandProcessor(ILogger logger, ICommandValidator<AuthorizeCommand> commandValidator,
-        IValidator<Message> messageValidator, MetricsProcessor? metricsProcessor, IAuthorizer authorizer,
-        ILayoutSupplier<TReplyMarkup> layoutSupplier)
-        : base(logger, commandValidator, messageValidator, metricsProcessor)
+    public AuthorizeCommandProcessor(ILogger<AuthorizeCommandProcessor<TReplyMarkup>> logger,
+        ICommandValidator<AuthorizeCommand> commandValidator,
+        ILayoutSupplier<TReplyMarkup> layoutSupplier,
+        ILayoutParser layoutParser,
+        IValidator<Message> messageValidator,
+        MetricsProcessor? metricsProcessor,
+        IAuthorizer authorizer)
+        : base(logger,
+            commandValidator,
+            messageValidator,
+            metricsProcessor)
     {
         _authorizer = authorizer;
-        _layoutSupplier = layoutSupplier;
+        var responseMarkup = Init(layoutSupplier, layoutParser);
+
+        _options = SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
+    }
+
+    private static TReplyMarkup Init(ILayoutSupplier<TReplyMarkup> layoutSupplier, ILayoutParser layoutParser)
+    {
+        var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
+        var responseLayout = layoutParser.ParseFromFile(Path.Combine(location, "start_layout.json"));
+        var responseMarkup = layoutSupplier.GetMarkup(responseLayout);
+        return responseMarkup;
     }
 
     /// <summary>
@@ -94,7 +104,7 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
         var responseLayout = new InlineButtonMenu(1, 1);
         responseLayout.AddControl(new Button
         {
-            Content = "Go",
+            Content = "Sign in",
             CallbackData = url
         });
 

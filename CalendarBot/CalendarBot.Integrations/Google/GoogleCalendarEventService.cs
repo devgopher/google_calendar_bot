@@ -4,15 +4,15 @@ using Event = CalendarBot.Dal.Database.Entities.Event;
 
 namespace CalendarBot.Integrations.Google;
 
-public class CalendarEventService : ICalendarEventService
+public class GoogleCalendarEventService : ICalendarEventService
 {
     private readonly CalendarService _calendarService;
 
     /// <summary>
-    /// Initializes a new instance of the CalendarEventService class.
+    /// Initializes a new instance of the GoogleCalendarEventService class.
     /// </summary>
     /// <param name="calendarService">The Google Calendar service instance.</param>
-    public CalendarEventService(CalendarService calendarService)
+    public GoogleCalendarEventService(CalendarService calendarService)
     {
         _calendarService = calendarService;
     }

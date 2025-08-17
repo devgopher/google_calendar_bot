@@ -1,4 +1,4 @@
-﻿namespace CalendarBot.Settings;
+﻿namespace CalendarBot.Commons.Settings;
 
 public class ReminderSettings
 {

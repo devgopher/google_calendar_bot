@@ -14,6 +14,13 @@ public class Event
     [Key]
     [MaxLength(1024)]
     public required string Id { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the unique identifier for the chat session.
+    /// This identifier is used to associate the tokens with a specific chat.
+    /// </summary>
+    [MaxLength(128)]
+    public required string ChatId { get; set; }  
 
     /// <summary>
     ///     Type of event
