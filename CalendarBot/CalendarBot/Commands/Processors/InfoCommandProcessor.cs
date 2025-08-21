@@ -59,10 +59,11 @@ public class InfoCommandProcessor<TReplyMarkup> : CommandProcessor<InfoCommand> 
                 Uid = Guid.NewGuid().ToString(),
                 ChatIds = message.ChatIds,
                 Body =
-                    "Discover delicious recipes at your fingertips! Simply type in your favorite ingredients or dish names, and our" +
-                    " bot will provide you with a variety of recipes tailored to your preferences. Whether you're looking for quick meals," +
-                    " healthy options, or gourmet dishes, the Recipe Assistant is here to inspire your culinary adventures. Start cooking today!" +
-                    "\nEnjoy!"
+                    "The Google Calendar Reminder Bot sends timely notifications for your upcoming events directly from Google Calendar." +
+                    " It allows users to customize reminder settings, ensuring they receive alerts at their preferred times. With real-time notifications," +
+                    " you’ll never miss important appointments or meetings. The bot provides detailed event information, " +
+                    "including titles, times, and locations. \n" +
+                    "Stay organized and enhance your productivity with this essential reminder tool!!"
             }
         };
 

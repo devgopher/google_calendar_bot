@@ -4,7 +4,7 @@
     [
       {
         "Button": {
-          "Content": "/FindRecipe \uD83C\uDFC6"
+          "Content": "/GetEventsForToday \uD83D\uDDD3"
         }
       }
     ],

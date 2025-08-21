@@ -33,7 +33,7 @@ builder.Services
        .AddSingleton<ILayoutParser, JsonLayoutParser>()
        .AddSingleton<ICalendarWriter, CalendarWriter>()
        .AddSingleton<ICalendarReader, CalendarReader>()
-       .AddSingleton<ICalendarEventService, GoogleCalendarEventService>()
+       .AddSingleton<ICalendarEventService, CalendarEventServiceMock>()
        .AddSingleton<CalendarService>();
        
 var connection = builder.Configuration.GetSection(ReminderSettings.Section).Get<ReminderSettings>()?.DbConnection;

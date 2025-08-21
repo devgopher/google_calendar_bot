@@ -31,7 +31,6 @@ public class GoogleCalendarEventService : ICalendarEventService
         request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
         Events events = await request.ExecuteAsync();
-        // return events.Items;
 
         throw new NotImplementedException();
     }

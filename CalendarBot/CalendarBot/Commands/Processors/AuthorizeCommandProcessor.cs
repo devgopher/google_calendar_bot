@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 using Botticelli.Client.Analytics;
-using Botticelli.Controls.BasicControls;
-using Botticelli.Controls.Layouts.Inlines;
 using Botticelli.Controls.Parsers;
 using Botticelli.Framework.Commands.Processors;
 using Botticelli.Framework.Commands.Validators;
@@ -87,17 +85,5 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
         };
 
         await SendMessage(messageRequest, token: token);
-    }
-
-    private static TReplyMarkup GetAuthButton(ILayoutSupplier<TReplyMarkup> layoutSupplier, string url)
-    {
-        var responseLayout = new InlineButtonMenu(1, 1);
-        responseLayout.AddControl(new Button
-        {
-            Content = "Sign in",
-            CallbackData = url
-        });
-
-        return layoutSupplier.GetMarkup(responseLayout);
     }
 }
