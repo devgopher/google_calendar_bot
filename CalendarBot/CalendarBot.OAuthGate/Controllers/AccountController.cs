@@ -1,15 +1,18 @@
-﻿using CalendarBot.Dal.Database.Entities;
+﻿using CalendarBot.Commons.Settings;
+using CalendarBot.Dal.Database.Entities;
 using CalendarBot.Dal.Database.Repositories;
-using CalendarBot.OAuthGate.Settings;
 using Flurl;
 using Flurl.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace CalendarBot.OAuthGate.Controllers;
 
+[ApiController]
+[AllowAnonymous]
 [Route("api/[controller]")]
-public class AccountController : Controller
+public class AccountController
 {
     private readonly IAuth _auth;
     private readonly IOptionsSnapshot<GoogleAuthSettings> _settings;
@@ -29,7 +32,7 @@ public class AccountController : Controller
                 client_id = _settings.Value.ClientId,
                 redirect_uri = _settings.Value.RedirectUri, // GetAccessToken
                 response_type = "token",
-                scope = "calendar.readonly",
+                scope = "https://www.googleapis.com/auth/calendar.readonly",
                 state = $"{chatId}_{Convert.ToBase64String(Guid.NewGuid().ToByteArray())}"
             }).ToString());
     }

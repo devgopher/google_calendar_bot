@@ -19,6 +19,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<GoogleAuthSettings>(builder.Configuration.GetSection(GoogleAuthSettings.Section));
+
 builder.Services
        .AddTelegramBot(builder.Configuration)
        .Prepare();
@@ -57,7 +59,7 @@ builder.Services.AddBotCommand<GetEventsForTodayCommand>()
        .AddValidator<PassValidator<GetEventsForTodayCommand>>();
 
 builder.Services.AddBotCommand<AuthorizeCommand>()
-       .AddProcessor<AuthorizeCommandProcessor<ReplyKeyboardMarkup>>()
+       .AddProcessor<AuthorizeCommandProcessor<InlineKeyboardMarkup>>()
        .AddValidator<PassValidator<AuthorizeCommand>>();
 
 builder.Services.AddHostedService<GoogleUpdater>()

@@ -10,6 +10,7 @@
         <PackageReference Include="Google.Apis.Calendar.v3" Version="1.69.0.3746" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\CalendarBot.Commons\CalendarBot.Commons.csproj" />
       <ProjectReference Include="..\CalendarBot.Dal\CalendarBot.Dal.csproj" />
       <ProjectReference Include="..\CalendarBot.OAuthGate\CalendarBot.OAuthGate.csproj" />
     </ItemGroup>

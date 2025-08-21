@@ -20,8 +20,7 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
 {
     private readonly IAuthorizer _authorizer;
     private readonly ILayoutSupplier<TReplyMarkup> _layoutSupplier;
-    private readonly SendOptionsBuilder<TReplyMarkup>? _options;
-    
+
     public AuthorizeCommandProcessor(ILogger<AuthorizeCommandProcessor<TReplyMarkup>> logger,
         ICommandValidator<AuthorizeCommand> commandValidator,
         ILayoutSupplier<TReplyMarkup> layoutSupplier,
@@ -33,9 +32,10 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
             messageValidator)
     {
         _authorizer = authorizer;
-        var responseMarkup = Init(layoutSupplier, layoutParser);
+        _layoutSupplier = layoutSupplier;
+        var responseMarkup = Init(layoutParser);
 
-        _options = SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
+        SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
     }
 
     public AuthorizeCommandProcessor(ILogger<AuthorizeCommandProcessor<TReplyMarkup>> logger,
@@ -51,16 +51,17 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
             metricsProcessor)
     {
         _authorizer = authorizer;
-        var responseMarkup = Init(layoutSupplier, layoutParser);
+        _layoutSupplier = layoutSupplier;
+        var responseMarkup = Init(layoutParser);
 
-        _options = SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
+        SendOptionsBuilder<TReplyMarkup>.CreateBuilder(responseMarkup);
     }
 
-    private static TReplyMarkup Init(ILayoutSupplier<TReplyMarkup> layoutSupplier, ILayoutParser layoutParser)
+    private TReplyMarkup Init(ILayoutParser layoutParser)
     {
         var location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
         var responseLayout = layoutParser.ParseFromFile(Path.Combine(location, "start_layout.json"));
-        var responseMarkup = layoutSupplier.GetMarkup(responseLayout);
+        var responseMarkup = _layoutSupplier.GetMarkup(responseLayout);
         return responseMarkup;
     }
 
@@ -71,9 +72,9 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
     /// <param name="token">A cancellation token to cancel the operation if needed.</param>
     protected override async Task InnerProcess(Message message, CancellationToken token)
     {
-        // Implementation for processing the authorization command goes here.
-        // This method should handle the logic for authorizing the command based on the provided message.
-        var options = await GetOptions(message);
+        var chatId = message.ChatIds.FirstOrDefault();
+        if (chatId == null)
+            return;
 
         var messageRequest = new SendMessageRequest
         {
@@ -81,25 +82,14 @@ public class AuthorizeCommandProcessor<TReplyMarkup> : CommandProcessor<Authoriz
             {
                 Uid = Guid.NewGuid().ToString(),
                 ChatIds = message.ChatIds,
-                Body = "Authenticate, please..."
+                Body = $"Authenticate, please: {await _authorizer.Authorize(chatId)}"
             }
         };
 
-        await SendMessage(messageRequest, options, token);
+        await SendMessage(messageRequest, token: token);
     }
 
-    private async Task<SendOptionsBuilder<TReplyMarkup>?> GetOptions(Message message)
-    {
-        var chatId = message.ChatIds.FirstOrDefault();
-        if (chatId == null)
-            return null;
-
-        var markup = Init(_layoutSupplier, await _authorizer.Authorize(chatId));
-
-        return SendOptionsBuilder<TReplyMarkup>.CreateBuilder(markup);
-    }
-
-    private static TReplyMarkup Init(ILayoutSupplier<TReplyMarkup> layoutSupplier, string url)
+    private static TReplyMarkup GetAuthButton(ILayoutSupplier<TReplyMarkup> layoutSupplier, string url)
     {
         var responseLayout = new InlineButtonMenu(1, 1);
         responseLayout.AddControl(new Button

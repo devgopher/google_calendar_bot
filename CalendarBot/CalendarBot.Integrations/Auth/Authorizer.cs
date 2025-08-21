@@ -1,4 +1,4 @@
-﻿using CalendarBot.OAuthGate.Settings;
+﻿using CalendarBot.Commons.Settings;
 using Flurl;
 using Microsoft.Extensions.Options;
 
@@ -21,7 +21,7 @@ public class Authorizer : IAuthorizer
                 client_id = _settings.Value.ClientId,
                 redirect_uri = _settings.Value.RedirectUri, // GetAccessToken
                 response_type = "token",
-                scope = "calendar.readonly",
+                scope = "https://www.googleapis.com/auth/calendar.readonly",
                 state = $"{chatId}_{Convert.ToBase64String(Guid.NewGuid().ToByteArray())}"
             }).ToString());
     }
